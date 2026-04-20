@@ -1,0 +1,160 @@
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Meatball', '10.00', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Meatball(Chicken)', '9.50', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Meatball(Pork)', '9.50', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Meatball(Vegan)', '15.00', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Meatball(Bulk)', '120.00', '10');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Green Meatball', '11.50', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Purple Meatball', '11.50', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Suspicious Meatball', '4.99', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('llabtaeM', '20.00', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Ball-less Meatball', '5.00', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Ball', '15.99', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Meat', '15.99', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Novelty Meatball', '100.00', '10');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Giant Meatball', '90.00', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Miniature Meatball', '1.00', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Festive Meatball', '15.00', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Radiant Meatball', '25.00', '25');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Meatcube', '13.31', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Vintage Meatball', '11.00', '50');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('Flying Meatball', '10.01', '100');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('The One Piece', '999.99', '0');
+
+INSERT INTO Product
+(Name, Price, Stock)
+VALUES
+('the two piece', '20.00', '50');
+
+INSERT INTO Customer
+(Name, Email, ShippingAddr, BillingInfo)
+VALUES
+('John', 'john@john.john', 'John st. DeKalb IL', '5646564656465646');
+
+INSERT INTO Customer
+(Name, Email, ShippingAddr, BillingInfo)
+VALUES
+('Dalinar Kholin', 'theBlackthorn@radiant.com', 'Urithiru Room 1', '1234567890098765');
+
+INSERT INTO Customer
+(Name, Email, ShippingAddr, BillingInfo)
+VALUES
+('Ri Shin', 'greatGeneral@qin.com', 'Xianyang China', '2341469714698875');
+
+INSERT INTO Customer
+(Name, Email, ShippingAddr, BillingInfo)
+VALUES
+('Monkey D. Luffy', '4@gamil.com', 'Thousand Sunny, Grand Line', '5656565656565656');
+
+INSERT INTO Customer
+(Name, Email, ShippingAddr, BillingInfo)
+VALUES
+('Frieren', '5@aol.com', 'Forests of Strahl', '0000000000000001');
+
+INSERT INTO Orders
+(UserID, Price, Status)
+VALUES
+('4', '120.00', 'Shipped');
+
+INSERT INTO Orders
+(UserID, Price, Status)
+VALUES
+('4', '120.00', 'Pending');
+
+INSERT INTO Orders
+(UserID, Price, Status)
+VALUES
+('4', '120.00', 'Pending');
+
+INSERT INTO Orders
+(UserID, Price, Status)
+VALUES
+('5', '25.00', 'Pending');
+
+INSERT INTO Orders
+(UserID, Price, Status)
+VALUES
+('1', '100.00', 'Shipped');
+
