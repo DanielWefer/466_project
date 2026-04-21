@@ -109,52 +109,77 @@ VALUES
 ('the two piece', '20.00', '50');
 
 INSERT INTO Customer
-(Name, Email, ShippingAddr, BillingInfo)
+(Name, Email)
 VALUES
-('John', 'john@john.john', 'John st. DeKalb IL', '5646564656465646');
+('John', 'john@john.john');
 
 INSERT INTO Customer
-(Name, Email, ShippingAddr, BillingInfo)
+(Name, Email)
 VALUES
-('Dalinar Kholin', 'theBlackthorn@radiant.com', 'Urithiru Room 1', '1234567890098765');
+('Dalinar Kholin', '2@gmail.com');
 
 INSERT INTO Customer
-(Name, Email, ShippingAddr, BillingInfo)
+(Name, Email)
 VALUES
-('Ri Shin', 'greatGeneral@qin.com', 'Xianyang China', '2341469714698875');
+('Ri Shin', '3@gmail.com');
 
 INSERT INTO Customer
-(Name, Email, ShippingAddr, BillingInfo)
+(Name, Email)
 VALUES
-('Monkey D. Luffy', '4@gamil.com', 'Thousand Sunny, Grand Line', '5656565656565656');
+('Monkey D. Luffy', '4@gmail.com');
 
 INSERT INTO Customer
-(Name, Email, ShippingAddr, BillingInfo)
+(Name, Email)
 VALUES
-('Frieren', '5@aol.com', 'Forests of Strahl', '0000000000000001');
+('Frieren', '5@aol.com');
 
 INSERT INTO Orders
-(UserID, Price, Status)
+(UserID, Status, ShippingAddr, BillingInfo)
 VALUES
-('4', '120.00', 'Shipped');
+('1', 'Shipped', '1 John St., Cabin John, MD', '5646564656465646');
 
 INSERT INTO Orders
-(UserID, Price, Status)
+(UserID, Status, ShippingAddr, BillingInfo)
 VALUES
-('4', '120.00', 'Pending');
+('2', 'Shipped','Urithiru room 1','1010101010101010');
 
 INSERT INTO Orders
-(UserID, Price, Status)
+(UserID, Status, ShippingAddr, BillingInfo)
 VALUES
-('4', '120.00', 'Pending');
+('3', 'Shipped','Xianyang China','1547863258467351');
 
 INSERT INTO Orders
-(UserID, Price, Status)
+(UserID, Status, ShippingAddr, BillingInfo)
 VALUES
-('5', '25.00', 'Pending');
+('4', 'Pending','Thousand Sunny, Grand Line','5656565656565656');
 
 INSERT INTO Orders
-(UserID, Price, Status)
+(UserID, Status, ShippingAddr, BillingInfo)
 VALUES
-('1', '100.00', 'Shipped');
+('1', 'Shipped','Forests of Strahl','0000000000000001');
+
+INSERT INTO OrderItem
+(OrderID, ProductID, Quantity)
+VALUES
+('1','1','1');
+
+INSERT INTO OrderItem
+(OrderID, ProductID, Quantity)
+VALUES
+('2','17','10');
+
+INSERT INTO OrderItem
+(OrderID, ProductID, Quantity)
+VALUES
+('3','14','2');
+
+INSERT INTO OrderItem
+(OrderID, ProductID, Quantity)
+VALUES
+('4','5','20');
+
+INSERT INTO OrderItem
+(OrderID, ProductID, Quantity)
+VALUES
+('5','17','1');
 
