@@ -1,6 +1,6 @@
-# 🍝 Meatball Shop
+# 🍝 Meatball Mall
 
-An e-commerce web app for ordering the world's finest meatballs, with customer cart/checkout and employee inventory management.
+An e-commerce web app for ordering the world's finest meatballs, with customer cart/checkout and employee inventory management. Satisfying all your meatball needs since yesterday.
 
 ---
 
