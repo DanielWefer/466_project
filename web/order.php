@@ -22,7 +22,7 @@ $userID = 1;
         <ul>
           <!-- FIXED LINKS -->
           <li><a href="home.php"><b>Home</b></a></li>
-          <li><a href="login.html"><b>Login</b></a></li>
+          <li><a href="login.php"><b>Login</b></a></li>
           <li><a href="cart.php"><b>Cart</b></a></li>
           <li><a href="order.php"><b>Orders</b></a></li>
         </ul>
@@ -91,7 +91,7 @@ if(!$hasOrders){
 
     <footer>
       <ul>
-        <li><a href="empLogin.html"><b>Employee Login</b></a></li>
+        <li><a href="empLogin.php"><b>Employee Login</b></a></li>
       </ul>
     </footer>
   </body>
