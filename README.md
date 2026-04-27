@@ -10,6 +10,28 @@ An e-commerce web app for ordering the world's finest meatballs, with customer c
 
 ---
 
+# IMPORTANT: Create db_connect.php locally
+```
+<?php
+// Database Connection File
+// Used In All Other .php Files
+// Through: require 'db_connect.php';
+$host = "courses";
+$db = "z1234567";
+$user = "z1234567"; // MariaDB
+$pass = "YYYYMmmDD"; // MariaDB
+
+try{
+	$pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e){
+	die("Connection failed: " . $e->getMessage());
+}
+?>
+```
+### Change db/user/pass to your Z-ID and Password
+---
+
 ## Entities & Relationships
 
 | Entity | Primary Key | Attributes | Relationships |
