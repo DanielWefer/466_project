@@ -14,7 +14,7 @@ if (isset($_POST['login'])) {
 
     if ($emp) {
         // redirect to admin page (or wherever your employee dashboard is)
-        header("Location: admin.php?empID=" . $emp['EmpID']);
+        header("Location: empInventory.php?empID=" . $emp['EmpID']);
         exit();
     } else {
         $error = "Invalid employee name.";
@@ -44,6 +44,9 @@ if (isset($_POST['login'])) {
           <li><a href="order.php"><b>Orders</b></a></li>
         </ul>
       </nav>
+      <?php if (!empty($_SESSION['user_email'])): ?>
+        <div class="user-info"><?= htmlspecialchars($_SESSION['user_email']) ?></div>
+      <?php endif; ?>
     </header>
 
     <main>
@@ -69,6 +72,8 @@ if (isset($_POST['login'])) {
     <footer>
       <ul>
         <li><a href="empLogin.php"><b>Employee Login</b></a></li>
+        <li><a href="empInventory.php"><b>Inventory Management</b></a></li>
+        <li><a href="empOrder.php"><b>Order Fulfillment</b></a></li>
       </ul>
     </footer>
   </body>

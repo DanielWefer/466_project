@@ -74,6 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <footer>
       <ul>
         <li><a href="empLogin.php"><b>Employee Login</b></a></li>
+        <li><a href="empInventory.php"><b>Inventory Management</b></a></li>
+        <li><a href="empOrder.php"><b>Order Fulfillment</b></a></li>
       </ul>
     </footer>
   </body>

@@ -42,13 +42,12 @@
 		   echo '<h3>'.$row['Name'].'</h3>'."\r\n";
 		   echo '<h4 class="description">'.$row['Description'].'</h4>'."\r\n";
 		   echo '<p class="price">$'.$row['Price'].'</p>'."\r\n";
-		   echo '<button class="add-to-cart">Add to Cart</button>'."\r\n";
+		   echo '<button class="update-stock">Update Stock</button>'."\r\n";
 		   echo '<p class="stock in-stock">Stock: '.$row['Stock'].'</p>'."\r\n";
 		   echo '</div>'."\r\n";
 		   $counter++;
 	   }
 	   ?>
-	<!-- copy/paste to add more meatball cards... -->
       </div>
     </main>
     <footer>
