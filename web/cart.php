@@ -36,7 +36,8 @@ if(isset($_POST['remove'])){
       </nav>
       <?php if (!empty($_SESSION['user_email'])): ?>
         <div class="user-info"><?= htmlspecialchars($_SESSION['user_email']) ?></div>
-      <?php endif; ?>
+        <a href="logout.php"><button>Sign Out</button></a>
+        <?php endif; ?>
     </header>
 
     <main>
