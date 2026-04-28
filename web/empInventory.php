@@ -1,4 +1,18 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+require '../db_connect.php';
+
+if(!isset($_SESSION['emp_id'])){
+    header("Location: empLogin.php");
+    exit();
+}
+if (isset($_POST['update-stock'])) {
+	$productID = $_POST['product_id'];
+	$quantity = $_POST['quantity'];
+	$prep = $pdo->prepare("UPDATE Product SET Stock = ? WHERE ProductID = ?");
+	$prep->execute([$quantity, $productID]);
+}
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -27,25 +41,31 @@
     <main>
       <div class="catalogue">
 	   <?php
-	   require '../db_connect.php';
-	   $counter = 1;
-	   $sql = "SELECT COUNT(*) FROM Product;";
-	   $result = $pdo->query($sql);
-	   $row = $result->fetch();
-	   $total = $row[0];
-	   $sql = "SELECT * FROM Product ORDER BY ProductID;";
-	   $result = $pdo->query($sql);
-	   while($counter <= $total){
-		   echo '<div class="card">'."\r\n";
-		   echo '<img src="../meatballs/meatball'.$counter.'.png" alt="'.$row['Name'].'">';
-		   $row = $result->fetch();
-		   echo '<h3>'.$row['Name'].'</h3>'."\r\n";
-		   echo '<h4 class="description">'.$row['Description'].'</h4>'."\r\n";
-		   echo '<p class="price">$'.$row['Price'].'</p>'."\r\n";
-		   echo '<button class="update-stock">Update Stock</button>'."\r\n";
-		   echo '<p class="stock in-stock">Stock: '.$row['Stock'].'</p>'."\r\n";
-		   echo '</div>'."\r\n";
-		   $counter++;
+           $sql = "SELECT * FROM Product ORDER BY ProductID;";
+           $result = $pdo->query($sql);
+           foreach ($result->fetchAll() as $index => $row) {
+             $imgNum = $index + 1;
+             echo '<div class="card"
+               data-id="'.htmlspecialchars($row['ProductID']).'"
+               data-name="'.htmlspecialchars($row['Name']).'"
+               data-desc="'.htmlspecialchars($row['Description']).'"
+               data-price="'.htmlspecialchars($row['Price']).'"
+               data-stock="'.htmlspecialchars($row['Stock']).'"
+               data-img="../meatballs/meatball'.$imgNum.'.png"
+               style="cursor:pointer;">'."\r\n";
+             echo '<img src="../meatballs/meatball'.$imgNum.'.png" alt="'.htmlspecialchars($row['Name']).'">';
+             echo '<h3>'.htmlspecialchars($row['Name']).'</h3>'."\r\n";
+             echo '<h4 class="description">'.htmlspecialchars($row['Description']).'</h4>'."\r\n";
+             echo '<p class="price">$'.$row['Price'].'</p>'."\r\n";
+
+             echo '<form method="POST" action="empInventory.php">';
+	     echo '<input type="hidden" name="product_id" value="'.$row['ProductID'].'">';
+	     echo '<input type="number" id="quantity" value="'.$row['Stock'].'" name="quantity" min="0">';
+             echo '<button type="submit" name="update-stock" class="update-stock">Update Stock</button>';
+             echo '</form>';
+
+             echo '<p class="stock in-stock">Stock: '.$row['Stock'].'</p>'."\r\n";
+             echo '</div>'."\r\n";
 	   }
 	   ?>
       </div>
