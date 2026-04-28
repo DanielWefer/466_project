@@ -2,16 +2,27 @@
 require '../db_connect.php';
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
+if(!isset($_SESSION['user_id'])){
     header("Location: login.php");
     exit;
 }
 
 $userID = $_SESSION['user_id'];
 
+// Remove item
 if(isset($_POST['remove'])){
     $pdo->prepare("DELETE FROM CartItem WHERE CartID=? AND ProductID=?")
         ->execute([$_POST['cart_id'], $_POST['product_id']]);
+}
+
+// Update Quantity
+if(isset($_POST['update'])){
+    $cartID = $_POST['cart_id'];
+    $productID = $_POST['product_id'];
+    $quantity = max(1, intval($_POST['quantity']));
+
+    $stmt = $pdo->prepare("UPDATE CartItem SET Quantity = ? WHERE CartID = ? AND ProductID = ?");
+    $stmt->execute([$quantity, $cartID, $productID]);
 }
 ?>
 
@@ -30,14 +41,13 @@ if(isset($_POST['remove'])){
       </div>
       <nav>
         <ul>
-          <!-- FIXED: must use .php -->
           <li><a href="home.php"><b>Home</b></a></li>
           <li><a href="login.php"><b>Login</b></a></li>
           <li><a href="cart.php"><b>Cart</b></a></li>
           <li><a href="order.php"><b>Orders</b></a></li>
         </ul>
       </nav>
-      <?php if (!empty($_SESSION['user_email'])): ?>
+      <?php if(!empty($_SESSION['user_email'])): ?>
         <div class="user-info"><?= htmlspecialchars($_SESSION['user_email']) ?></div>
         <a href="logout.php"><button>Sign Out</button></a>
         <?php endif; ?>
@@ -60,7 +70,7 @@ $stmt->execute([$userID]);
 $total = 0;
 $hasItems = false;
 
-while($row = $stmt->fetch()){
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
     $hasItems = true;
 
     $subtotal = $row['Price'] * $row['Quantity'];
@@ -70,10 +80,17 @@ while($row = $stmt->fetch()){
     echo "<h3>{$row['Name']}</h3>";
     echo "<p>{$row['Quantity']} × {$row['Price']} = $subtotal</p>";
 
-    echo "<form method='POST'>
+    // Update/ Remove
+    echo "<form method='POST' style='border:none; margin-top:10px;'>
             <input type='hidden' name='cart_id' value='{$row['CartID']}'>
             <input type='hidden' name='product_id' value='{$row['ProductID']}'>
-            <button type='submit' name='remove'>Remove</button>
+
+            <div style='display:flex; gap:10px; justify-content:center; align-items:center;'>
+                <input type='number' name='quantity' value='{$row['Quantity']}' min='1' style='width:70px; padding:5px;'>
+
+                   <button type='submit' name='update' style='width:auto;'>Update</button>
+                   <button type='submit' name='remove' style='width:auto; background-color:#f44336;'>Remove</button>
+            </div>
           </form>";
 
     echo "</div><br>";
@@ -86,7 +103,7 @@ if(!$hasItems){
 }
 
 // Total
-if ($hasItems) {
+if($hasItems){
     echo "<h2>Total: $$total</h2>";
     echo "<a href='checkout.php'><b>Proceed to Checkout</b></a><br><br>";
 }
