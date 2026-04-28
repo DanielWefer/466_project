@@ -1,23 +1,27 @@
 <?php
+session_start();
 require '../db_connect.php';
 
 $error = "";
 
 // Handle Login
-if (isset($_POST['login'])) {
-    $name = $_POST['name'];
+if(isset($_POST['login'])){
+    $name = trim($_POST['name']);
+    $password = trim($_POST['password']);
 
-    $stmt = $pdo->prepare("SELECT * FROM Employee WHERE Name = ?");
-    $stmt->execute([$name]);
+    $stmt = $pdo->prepare("SELECT * FROM Employee WHERE Name = ? AND Password = ?");
+    $stmt->execute([$name, $password]);
 
-    $emp = $stmt->fetch();
+    $emp = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($emp) {
-        // redirect to admin page (or wherever your employee dashboard is)
-        header("Location: empInventory.php?empID=" . $emp['EmpID']);
+    if($emp){
+        $_SESSION['emp_id'] = $emp['EmpID'];
+        $_SESSION['emp_name'] = $emp['Name'];
+        
+        header("Location: empInventory.php");
         exit();
     } else {
-        $error = "Invalid employee name.";
+        $error = "Invalid employee login.";
     }
 }
 ?>
@@ -44,8 +48,9 @@ if (isset($_POST['login'])) {
           <li><a href="order.php"><b>Orders</b></a></li>
         </ul>
       </nav>
-      <?php if (!empty($_SESSION['user_email'])): ?>
-        <div class="user-info"><?= htmlspecialchars($_SESSION['user_email']) ?></div>
+
+      <?php if (!empty($_SESSION['emp_name'])): ?>
+        <div class="user-info"><?= htmlspecialchars($_SESSION['emp_name']) ?></div>
       <?php endif; ?>
     </header>
 
@@ -53,17 +58,18 @@ if (isset($_POST['login'])) {
       <h1>Employee Login</h1>
 
       <!-- ERROR MESSAGE -->
-      <?php
-      if ($error != "") {
-          echo "<p style='color:red;'>$error</p>";
-      }
-      ?>
+      <?php if(!empty($error)): ?>
+        <p style="color:red;"><?= htmlspecialchars($error) ?></p>
+      <?php endif; ?>
 
       <!-- LOGIN FORM -->
       <form method="POST">
         <label>Employee Name:</label><br>
         <input type="text" name="name" required><br><br>
 
+        <label>Password:</label><br>
+        <input type="password" name="password" required><br><br>
+        
         <button type="submit" name="login">Login</button>
       </form>
 
