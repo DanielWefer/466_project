@@ -1,10 +1,15 @@
 <?php
 require '../db_connect.php';
+session_start();
 
-// TEMPORARY: assume user is 1
-$userID = 1;
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+$userID = $_SESSION['user_id'];
 ?>
-<?php session_start(); ?>
+
 
 <!DOCTYPE html>
 <html>
