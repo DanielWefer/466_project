@@ -1,7 +1,12 @@
 <?php
+session_start();
 require '../db_connect.php';
+
+if(!isset($_SESSION['emp_id'])){
+    header("Location: empLogin.php");
+    exit();
+}
 ?>
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
   <head>
