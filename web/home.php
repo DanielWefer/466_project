@@ -4,6 +4,31 @@ session_start();
 require '../db_connect.php';
 $message = "";
 
+// Auto Login Customer (Frieren)
+if(!isset($_SESSION['user_id'])){
+    $stmt = $pdo->prepare("SELECT * FROM Customer WHERE Email = '5@aol.com' AND Password = '5'");
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if($user){
+        $_SESSION['user_id'] = $user['UserID'];
+        $_SESSION['user_name'] = $user['Name'];
+        $_SESSION['user_email'] = $user['Email'];
+    }
+}
+
+// Auto Login Employee (Matt)
+if(!isset($_SESSION['emp_id'])){
+    $stmt = $pdo->prepare("SELECT * FROM Employee WHERE Name = 'Matt' AND Password = 'Matt'");
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if($user){
+        $_SESSION['emp_id'] = $user['EmpID'];
+        $_SESSION['emp_name'] = $user['Name'];
+    }
+}
+
 if (isset($_POST['add_to_cart'])) {
     if (!isset($_SESSION['user_id'])) {
         header("Location: login.php");
