@@ -52,6 +52,7 @@ $stmt = $pdo->prepare("
 $stmt->execute([$userID]);
 
 $hasOrders = false;
+$grandTotal = 0;
 
 // Loop Through Orders
 while($order = $stmt->fetch()){
@@ -85,8 +86,15 @@ while($order = $stmt->fetch()){
 
     echo "<h4>Order Total: $$orderTotal</h4>";
     echo "</div><br>";
+    $grandTotal += $orderTotal;
 }
 
+// Display User Grand Total
+if($hasOrders) {
+	echo "<div class='card'>";
+	echo "<h2>Total Spent on Meatball Mall: $$grandTotal</h2>";
+	echo "</div><br>";
+}
 
 // No Orders Message
 if(!$hasOrders){

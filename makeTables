@@ -30,8 +30,9 @@ OrderID INT(3) PRIMARY KEY AUTO_INCREMENT,
 UserID INT(3) NOT NULL, 
 EmpID INT(3),  
 Status CHAR(10) NOT NULL, 
-ShippingAddr CHAR(30), 
-BillingInfo CHAR(16), 
+ShippingAddr CHAR(96), 
+BillingInfo CHAR(16),
+Notes CHAR(256),
 FOREIGN KEY (UserID) REFERENCES Customer(UserID), 
 FOREIGN KEY (EmpID) REFERENCES Employee(EmpID));
 
