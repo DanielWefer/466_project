@@ -139,14 +139,14 @@ VALUES
 ('1', 'Delivered', '1 John St., Cabin John, MD', '5646564656465646');
 
 INSERT INTO Orders
-(UserID, Status, ShippingAddr, BillingInfo)
+(UserID, Status, ShippingAddr, BillingInfo, Notes)
 VALUES
-('2', 'Cancelled','Urithiru room 1','1010101010101010');
+('2', 'Cancelled','Urithiru room 1','1010101010101010','Order was refunded.');
 
 INSERT INTO Orders
-(UserID, Status, ShippingAddr, BillingInfo)
+(UserID, Status, ShippingAddr, BillingInfo, Notes)
 VALUES
-('3', 'Shipping','Xianyang China','1547863258467351');
+('3', 'Shipping','Xianyang China','1547863258467351','Package has left the warehouse.');
 
 INSERT INTO Orders
 (UserID, Status, ShippingAddr, BillingInfo)
@@ -154,9 +154,9 @@ VALUES
 ('4', 'Processing','Thousand Sunny, Grand Line','5656565656565656');
 
 INSERT INTO Orders
-(UserID, Status, ShippingAddr, BillingInfo)
+(UserID, Status, ShippingAddr, BillingInfo, Notes)
 VALUES
-('5', 'Shipping','Forests of Strahl','0000000000000001');
+('5', 'Shipping','Forests of Strahl','0000000000000001','Shipping is taking longer than expected.');
 
 INSERT INTO OrderItem
 (OrderID, ProductID, Quantity)

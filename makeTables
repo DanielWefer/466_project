@@ -32,7 +32,7 @@ EmpID INT(3),
 Status CHAR(10) NOT NULL, 
 ShippingAddr CHAR(96), 
 BillingInfo CHAR(16),
-Notes CHAR(256),
+Notes CHAR(200),
 FOREIGN KEY (UserID) REFERENCES Customer(UserID), 
 FOREIGN KEY (EmpID) REFERENCES Employee(EmpID));
 
