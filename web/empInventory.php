@@ -34,8 +34,9 @@ if (isset($_POST['update-stock'])) {
           <li><a href="order.php"><b>Orders</b></a></li>
         </ul>
       </nav>
-      <?php if (!empty($_SESSION['user_email'])): ?>
-        <div class="user-info"><?= htmlspecialchars($_SESSION['user_email']) ?></div>
+      <?php if (!empty($_SESSION['emp_name'])): ?>
+        <div class="user-info"><?= htmlspecialchars($_SESSION['emp_name']) ?></div>
+        <a href="logout.php"><button>Sign Out</button></a>
       <?php endif; ?>
     </header>
     <main>
