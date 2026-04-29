@@ -6,6 +6,18 @@ if(!isset($_SESSION['emp_id'])){
     header("Location: empLogin.php");
     exit();
 }
+
+// Handle status update
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
+  $orderID = $_POST['order_id'];
+  $newStatus = $_POST['status'];
+    
+  $stmt = $pdo->prepare("UPDATE Orders SET Status = ? WHERE OrderID = ?");
+  $stmt->execute([$newStatus, $orderID]);
+}
+
+// Get the selected status filter
+$statusFilter = isset($_POST['status_filter']) ? $_POST['status_filter'] : '';
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,14 +49,38 @@ if(!isset($_SESSION['emp_id'])){
     <main>
       <h1>Your Orders</h1>
 
+        <!-- Status Filter -->
+        <form method="POST" style="border: none; margin-bottom: 20px; padding: 15px; background-color: #f0f0f0; border-radius: 8px; width: 100%; display: flex; justify-content: center; align-items: center;">
+          <label for="status_filter" style="font-weight: bold; font-size: 1.1em; margin-right:10px;">Filter by Status:</label>
+          <select name="status_filter" id="status_filter" onchange="this.form.submit()" style="margin-left: 10px; min-width:160px;">
+            <option value="">All Orders</option>
+            <option value="Processing" <?php echo $statusFilter === 'Processing' ? 'selected' : ''; ?>>Processing</option>
+            <option value="Cancelled" <?php echo $statusFilter === 'Cancelled' ? 'selected' : ''; ?>>Cancelled</option>
+            <option value="Shipping" <?php echo $statusFilter === 'Shipping' ? 'selected' : ''; ?>>Shipping</option>
+            <option value="Delivered" <?php echo $statusFilter === 'Delivered' ? 'selected' : ''; ?>>Delivered</option>
+          </select>
+        </form>
 <?php
 // Get User Orders
-$stmt = $pdo->prepare("
-    SELECT * FROM Orders
-    ORDER BY OrderID DESC
-");
+$query = "
+  SELECT o.*, c.Email, c.Name 
+  FROM Orders o
+  JOIN Customer c ON o.UserID = c.UserID
+";
 
-$stmt->execute();
+if ($statusFilter) {
+  $query .= " WHERE o.Status = ?";
+}
+
+$query .= " ORDER BY o.OrderID DESC";
+
+$stmt = $pdo->prepare($query);
+
+if ($statusFilter) {
+  $stmt->execute([$statusFilter]);
+} else {
+  $stmt->execute();
+}
 
 $hasOrders = false;
 
@@ -54,7 +90,26 @@ while($order = $stmt->fetch()){
 
     echo "<div class='card'>";
     echo "<h2>Order #{$order['OrderID']}</h2>";
-    echo "<p>Status: {$order['Status']}</p>";
+  echo "<p><strong>Customer Name:</strong> {$order['Name']}</p>";
+  echo "<p><strong>Customer Email:</strong> {$order['Email']}</p>";
+    
+   // Current status text
+  echo "<p><strong>Current Status:</strong> {$order['Status']}</p>";
+
+  // Status dropdown for updating
+  echo "<form method='POST' style='margin: 10px 0; display:flex; justify-content:center; align-items:center; gap:8px; width:100%;'>";
+  echo "<label for='status_{$order['OrderID']}' style='margin-right:6px;'>Modify Status:</label>";
+  echo "<select name='status' id='status_{$order['OrderID']}' style='min-width:140px;'>";
+  $statuses = ['Processing', 'Cancelled', 'Shipping', 'Delivered'];
+  foreach ($statuses as $status) {
+    $selected = $order['Status'] === $status ? 'selected' : '';
+    echo "<option value='{$status}' {$selected}>{$status}</option>";
+  }
+  echo "</select>";
+  echo "<input type='hidden' name='order_id' value='{$order['OrderID']}'>";
+  echo "<button type='submit' name='update_status' style='width:auto; padding:6px 10px; font-size:0.9em;'>Update</button>";
+  echo "</form>";
+
     echo "<p>Shipping: {$order['ShippingAddr']}</p>";
     echo "<p>Billing: {$order['BillingInfo']}</p>";
 
