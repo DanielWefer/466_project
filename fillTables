@@ -136,7 +136,7 @@ VALUES
 INSERT INTO Orders
 (UserID, Status, ShippingAddr, BillingInfo)
 VALUES
-('1', 'Delivered', '1 John St., Cabin John, MD', '5646564656465646');
+('1', 'Delivered', '1 John St., Cabin John, MD', '1234123412341234');
 
 INSERT INTO Orders
 (UserID, Status, ShippingAddr, BillingInfo, Notes)
@@ -156,7 +156,7 @@ VALUES
 INSERT INTO Orders
 (UserID, Status, ShippingAddr, BillingInfo, Notes)
 VALUES
-('5', 'Shipping','Forests of Strahl','0000000000000001','Shipping is taking longer than expected.');
+('5', 'Shipping','Forests of Strahl','1234567812345678','Shipping is taking longer than expected.');
 
 INSERT INTO OrderItem
 (OrderID, ProductID, Quantity)

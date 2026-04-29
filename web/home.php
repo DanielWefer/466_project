@@ -89,11 +89,11 @@ if (isset($_POST['add_to_cart'])) {
 
     <main>
       <?php
-      if ($message != "") {
-          echo "<p style='text-align:center;'><b>$message</b></p>";
-      }
+        if ($message != "") {
+          echo "<h3 style='text-align:center; border:2px solid tomato; padding:5px; margin-top:0px; margin-bottom:0;'><b>$message</b></h3>";
+        }
       ?>
-      <div class="catalogue">
+           <div class="catalogue">
 	   <?php
 	   $sql = "SELECT * FROM Product ORDER BY ProductID;";
 	   $result = $pdo->query($sql);
@@ -116,8 +116,12 @@ if (isset($_POST['add_to_cart'])) {
              echo '<input type="hidden" name="product_id" value="'.$row['ProductID'].'">';
              echo '<button type="submit" name="add_to_cart" class="add-to-cart">Add to Cart</button>';
              echo '</form>';
-
-             echo '<p class="stock in-stock">Stock: '.$row['Stock'].'</p>'."\r\n";
+             if ($row['Stock'] === 0) {
+               $stockClass = 'out-of-stock';
+             } else {
+               $stockClass = 'in-stock';
+             }
+             echo '<p class="stock ' . $stockClass . '">Stock: '.$row['Stock'].'</p>'."\r\n";
              echo '</div>'."\r\n";
            }
 	   ?>
@@ -149,6 +153,13 @@ if (isset($_POST['add_to_cart'])) {
 
     <!-- JavaScript for popup functionality -->
     <script>
+
+      const stock = parseInt(this.dataset.stock);
+      const stockEl = document.getElementById('modal-stock');
+      stockEl.textContent = 'Stock: ' + stock;
+      stockEl.className = stock === 0 ? 'out-of-stock' : stock <= 5 ? 'low-stock' : 'in-stock';
+
+      // Displays individual item information in a popup
       document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', function(e) {
             if (e.target.classList.contains('add-to-cart')) return;
@@ -168,7 +179,7 @@ if (isset($_POST['add_to_cart'])) {
       document.getElementById('modal-overlay').addEventListener('click', function(e) {
         if (e.target === this) closeModal();
       });
-
+      // Extension of above function
       function closeModal() {
         document.getElementById('modal-overlay').style.display = 'none';
       }

@@ -40,8 +40,9 @@ $userID = $_SESSION['user_id'];
     </header>
 
     <main>
-      <h1>Your Orders</h1>
-
+      <div class="cart-actions">
+        <h1>Your Orders</h1>
+      </div>
 <?php
 // Get User Orders
 $stmt = $pdo->prepare("
@@ -93,7 +94,7 @@ while($order = $stmt->fetch()){
 if($hasOrders) {
 	echo "<div class='card'>";
 	echo "<h2>Total Spent on Meatball Mall: $$grandTotal</h2>";
-	echo "</div><br>";
+	echo "</div>";
 }
 
 // No Orders Message
@@ -103,8 +104,9 @@ if(!$hasOrders){
 ?>
 
       <br>
-      <a href="home.php">Back to Store</a>
-
+      <div class="cart-actions">
+	<a href="home.php" class="proceed-to-checkout" style="margin-top:5px; margin-bottom:25px;">Back to Store</a>
+      </div>
     </main>
 
     <footer>

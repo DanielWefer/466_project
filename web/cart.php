@@ -54,7 +54,9 @@ if(isset($_POST['update'])){
     </header>
 
     <main>
-      <h1>Your Cart</h1>
+      <div class='cart-actions'>
+	<h1>Your Cart</h1>
+      </div>
 
 <?php
 // Get Cart Data
@@ -99,20 +101,24 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
 // Empty Cart Message
 if(!$hasItems){
-    echo "<p>Your cart is empty.</p>";
+    echo "<div class='cart-actions'>";
+    echo "<p style='padding-left:15px;'>Your cart is empty.</p>";
+    echo "</div>";
+
 }
 
 // Total
 if($hasItems){
-    echo "<h2>Total: $$total</h2>";
-    echo "<a href='checkout.php'><b>Proceed to Checkout</b></a><br><br>";
+
+    echo "<div class='cart-actions'>";
+      echo "<h2 style='padding-left:15px;'>Total: $$total</h2>";
+    echo "</div>";
+    echo "<div class='cart-actions'>";
+      echo "<a href='checkout.php' class='proceed-to-checkout'>Proceed to Checkout</a>";
+      echo "<a href='home.php' class='continue-shopping'>Continue Shopping</a>";
+    echo "</div>";
 }
 ?>
-
-      <br>
-      <a href="home.php">Continue Shopping</a><br><br>
-
-
     </main>
 
     <footer>

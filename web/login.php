@@ -51,18 +51,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
     <main>
       <?php if ($error): ?>
-        <p style="color:red; text-align:center;"><?= htmlspecialchars($error) ?></p>
+        <h3 style="color:red; text-align:center;"><?= htmlspecialchars($error) ?></h3>
       <?php endif; ?>
-      <form action="login.php" method="post">
+      <form action="login.php" method="post" style="text-align:center;">
         <div class="imgcontainer">
           <img src="../meatballs/meatball1.png" alt="Spinning Meatball" class="spinning">
         </div>
         <div class="container">
           <label for="emaii"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" required>
+          <input type="text" placeholder="Enter Email" name="email" style="text-align:center;" required>
 
           <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required>
+          <input type="password" placeholder="Enter Password" name="psw" style="text-align:center;" required>
 
           <button type="submit">Login</button>
         </div>

@@ -49,23 +49,25 @@ if (isset($_POST['update-stock'])) {
              echo '<div class="card"
                data-id="'.htmlspecialchars($row['ProductID']).'"
                data-name="'.htmlspecialchars($row['Name']).'"
-               data-desc="'.htmlspecialchars($row['Description']).'"
                data-price="'.htmlspecialchars($row['Price']).'"
                data-stock="'.htmlspecialchars($row['Stock']).'"
                data-img="../meatballs/meatball'.$imgNum.'.png"
                style="cursor:pointer;">'."\r\n";
              echo '<img src="../meatballs/meatball'.$imgNum.'.png" alt="'.htmlspecialchars($row['Name']).'">';
              echo '<h3>'.htmlspecialchars($row['Name']).'</h3>'."\r\n";
-             echo '<h4 class="description">'.htmlspecialchars($row['Description']).'</h4>'."\r\n";
              echo '<p class="price">$'.$row['Price'].'</p>'."\r\n";
 
              echo '<form method="POST" action="empInventory.php">';
 	     echo '<input type="hidden" name="product_id" value="'.$row['ProductID'].'">';
 	     echo '<input type="number" id="quantity" value="'.$row['Stock'].'" name="quantity" min="0">';
              echo '<button type="submit" name="update-stock" class="update-stock">Update Stock</button>';
-             echo '</form>';
-
-             echo '<p class="stock in-stock">Stock: '.$row['Stock'].'</p>'."\r\n";
+	     echo '</form>';
+             if ($row['Stock'] === 0) {
+               $stockClass = 'out-of-stock';
+             } else {
+               $stockClass = 'in-stock';
+             }
+             echo '<p class="stock ' . $stockClass . '">Stock: '.$row['Stock'].'</p>'."\r\n";
              echo '</div>'."\r\n";
 	   }
 	   ?>

@@ -48,7 +48,7 @@ $statusFilter = isset($_POST['status_filter']) ? $_POST['status_filter'] : '';
     </header>
 
     <main>
-      <h1>Your Orders</h1>
+      <h1 class="cart-actions">Order Fulfillment</h1>
 
         <!-- Status Filter -->
         <form method="POST" style="border: none; margin-bottom: 20px; padding: 15px; background-color: #f0f0f0; border-radius: 8px; width: 100%; display: flex; justify-content: center; align-items: center;">
@@ -141,13 +141,10 @@ while($order = $stmt->fetch()){
 
 // No Orders Message
 if(!$hasOrders){
-    echo "<p>You have no orders yet.</p>";
+    echo "<h3 class='cart-actions'>You have no orders yet.</h3>";
 }
 ?>
-
-      <br>
-      <a href="home.php">Back to Store</a>
-
+      </br>
     </main>
 
     <footer>
