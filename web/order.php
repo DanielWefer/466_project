@@ -64,7 +64,8 @@ while($order = $stmt->fetch()){
     echo "<p>Status: {$order['Status']}</p>";
     echo "<p>Shipping: {$order['ShippingAddr']}</p>";
     echo "<p>Billing: {$order['BillingInfo']}</p>";
-
+    echo "<p><b>Notes:</b> {$order['Notes']}</p>";
+    
     echo "<h3>Items:</h3>";
 
     // Get The Items In This Order

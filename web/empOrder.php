@@ -16,6 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
   $stmt->execute([$newStatus, $orderID]);
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_notes'])) {
+    $orderID = $_POST['order_id'];
+    $notes = $_POST['notes'];
+
+    $stmt = $pdo->prepare("UPDATE Orders SET Notes = ? WHERE OrderID = ?");
+    $stmt->execute([$notes, $orderID]);
+}
+
 // Get the selected status filter
 $statusFilter = isset($_POST['status_filter']) ? $_POST['status_filter'] : '';
 ?>
@@ -113,6 +121,15 @@ while($order = $stmt->fetch()){
 
     echo "<p>Shipping: {$order['ShippingAddr']}</p>";
     echo "<p>Billing: {$order['BillingInfo']}</p>";
+    echo "<p>Notes: {$order['Notes']}</p>";
+
+    echo "<form method='POST' style='margin: 10px 0; display:flex; justify-content: center; align-items:center; gap:8px; width:100%;'>";
+    echo "<label for='notes_{$order['OrderID']}' style='margin-right:6px;'>Modify Notes:</label>";
+    echo "<input type='text' name='notes' id='notes_{$order['OrderID']}' maxlength='200' value=\"" . htmlspecialchars($order['Notes'] ?? '') . "\" style='min-width:300px;'>";
+    echo "<input type='hidden' name='order_id' value='{$order['OrderID']}'>";
+    echo "<button type='submit' name='update_notes' style='width:auto; padding:6px 10px; font-size:0.9em;'>Update Notes</button>";
+    echo "</form>";
+
 
     echo "<h3>Items:</h3>";
 
