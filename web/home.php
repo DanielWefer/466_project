@@ -154,11 +154,6 @@ if (isset($_POST['add_to_cart'])) {
     <!-- JavaScript for popup functionality -->
     <script>
 
-      const stock = parseInt(this.dataset.stock);
-      const stockEl = document.getElementById('modal-stock');
-      stockEl.textContent = 'Stock: ' + stock;
-      stockEl.className = stock === 0 ? 'out-of-stock' : stock <= 5 ? 'low-stock' : 'in-stock';
-
       // Displays individual item information in a popup
       document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', function(e) {
@@ -183,6 +178,7 @@ if (isset($_POST['add_to_cart'])) {
       function closeModal() {
         document.getElementById('modal-overlay').style.display = 'none';
       }
+
     </script>
   </body>
 </html>
